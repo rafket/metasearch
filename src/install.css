@@ -1,0 +1,20 @@
+p {
+  width: 50rem;
+  max-width: 100%;
+}
+
+h1 {
+  color: #4c4c4c;
+}
+
+.keyword {
+  color: red;
+}
+
+.alias {
+  color: green;
+}
+
+a {
+  color: black;
+}

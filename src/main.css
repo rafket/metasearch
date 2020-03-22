@@ -1,0 +1,239 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+#searchresults {
+  margin-left: 5%;
+  margin-right: 2%;
+  width: 90%;
+  display: block;
+  overflow: hidden;
+}
+
+#main {
+  width: 100%;
+  margin: 0;
+  margin-top: 2rem;
+}
+
+#inactiveengines button {
+  background: #fafafa;
+  border: 1px solid #eaeaea;
+  margin: 0.1rem;
+  font-size: 1.2rem;
+  font-family: inherit;
+  color: rgb(46, 52, 54);
+}
+
+body {
+  margin: 0;
+  font-family: "Bitstream Vera Serif", serif;
+  font-size: 16px;
+  font-size-adjust: none;
+}
+
+#searchform {
+  margin-left: 5%;
+  width: 90%;
+  height: 2.9rem;
+  border: 1px solid #cacaca;
+  display: inline-block;
+}
+
+#searchbar::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+#searchbar {
+  padding-left: 0.5rem;
+  font-size: 1.2rem;
+  float: left;
+  width: calc(100% - 3rem);
+  height: 100%;
+  border: none !important;
+  outline: none;
+}
+
+#searchbutton {
+  font-size: 1.4rem;
+  font-family: "Noto Sans", Arial, sans-serif;
+  position: relative;
+  width: 3rem;
+  margin-left: 0;
+  margin-right: 0;
+  height: 100%;
+  border: none;
+  text-align: center;
+  background: #f6f5f4;
+}
+
+#header {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background: #fafafa;
+  border-bottom: 1px solid #eaeaea;
+  overflow: hidden;
+}
+
+#header a {
+  float: right;
+  margin-right: 2rem;
+  color: #00278e;
+  display: none;
+}
+
+#inactiveengines {
+  float: right;
+  margin-right: 2%;
+  display: block;
+  margin-left: 5%;
+  margin-bottom: 10%;
+  width: 90%;
+}
+
+#inactiveengines:empty {
+  display: none;
+}
+
+@media (min-width: 50em) {
+  #inactiveengines {
+    max-width: 40%;
+    margin-left: 0;
+  }
+
+  #searchresults {
+    max-width: 50%;
+    margin-right: 0;
+  }
+
+  #searchform {
+    width: 50%;
+  }
+
+  #header a {
+    display: inline-block;
+  }
+}
+
+#inactiveengines h2 {
+  margin-top: 0;
+  color: #4c4c4c;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.result_url {
+  color: green;
+  white-space: nowrap;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.result_info {
+  width: 100%;
+  display: inline-block;
+}
+
+.result p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.result_title {
+  margin-bottom: 0;
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 1.4rem;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 2px;
+}
+
+.result a {
+  text-decoration: none;
+  color: #00278e;
+}
+
+.result a:visited {
+  color: #6c00a2;
+}
+
+.result a:hover {
+  text-decoration: underline;
+}
+
+.result_engine {
+  font-size: 0.9rem;
+  color: gray;
+  float: right;
+  max-width: 30%;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.result_summary {
+  overflow: hidden;
+  max-height: 4.8em;
+  line-height: 1.2em;
+}
+
+.result {
+  margin-bottom: 2rem;
+  overflow: none;
+  display: block;
+  max-width: 100%;
+}

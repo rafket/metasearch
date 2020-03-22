@@ -1,0 +1,67 @@
+button {
+  background: #fafafa;
+  border: 1px solid #eaeaea;
+  margin: 0.1em;
+  font-size: 1.2em;
+}
+
+input {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+input[type=checkbox] {
+  width: auto;
+}
+
+h1 {
+  color: #4c4c4c;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#guide {
+  width: 50em;
+  max-width: 90%;
+}
+
+#engine_create_form {
+  margin-right: 3em;
+  display: inline-block;
+}
+
+#engine_create_form table {
+  border-collapse: separate;
+  border-spacing: 2em 2px;
+  margin-left: -1.5em;
+}
+
+#engines table th {
+  font-size: 1.5em;
+  font-weight: normal;
+  text-align: left;
+}
+
+#engines table {
+  margin-top: 2em;
+  word-break: break-all;
+  width: 35em;
+  display: inline-block;
+  margin-right: 1em;
+}
+
+#engines table td:nth-child(1) {
+  width: 10em;
+  font-weight: bold;
+  color: #4c4c4c;
+}
+
+#engines {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}

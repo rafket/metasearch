@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metasearch</title>
+    <link rel='icon' href='img/icon.svg' type='image/svg+xml'/>
+    <link rel='stylesheet' type='text/css' href='main.css'>
+  </head>
+  <body>
+    <div id='header'>
+      <form id='searchform'>
+        <input type='search' id='searchbar' name='q' autofocus>
+        <input type='submit' id='searchbutton' value='Go'>
+      </form>
+      <a href='options.html'>Options</a>
+    </div>
+    <div id='main'>
+      <div id='inactiveengines'></div>
+      <div id='searchresults'></div>
+    </div>
+    <script src='browser-polyfill.min.js'></script>
+    <script src='main.js' type='module'></script>
+  </body>
+</html>

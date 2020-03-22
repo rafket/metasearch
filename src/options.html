@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Metasearch Options</title>
+    <link rel="icon" href="img/icon.svg" type="image/svg+xml"/>
+    <link rel='stylesheet' type='text/css' href='options.css'>
+  </head>
+  <body>
+    <div id="guide">
+      <h1>How to install/modify search engines</h1>
+      <button id="toggle_advanced">Toggle advanced mode</button>
+      <p>Adding search engines manually is not very easy, so it is
+      recommended to only edit the existing engines. Switch to advanced mode if
+      you wish to add search engines manually.</p>
+      <p>A more user-friendly way of adding search engines is to use the
+      graphical helper. Perform a search on any website, and then right-click
+      on the Metasearch icon -> Add current page as engine.</p> 
+      <p>Search engines have aliases (comma-separated terms, no spaces) which
+      cause them to be enabled if any of them appear in the search query
+      (separated by spaces) and disable any other search engine whose aliases
+      do not appear in the search query. All aliases are removed from the
+      search query before being passed on to the enabled engines (even if they
+      do not match the respective engine).</p>
+      <p> Search engines also have keywords (comma-separated terms, no spaces,
+      lowercase) that enable them, but contrary to aliases, will not be removed
+      from the search query before being passed on to the engines. A star (*)
+      keyword will match all queries. In general, an engine is enabled if one
+      of its keywords exists in the search query, unless an alias exists in the
+      search query and none of the engines aliases exist in the query.</p>
+      <p class="advanced hidden">The search URL is the URL that will be
+      accessed for the engine. Use {searchTerms} as a placeholder for the
+      search query.</p>
+      <p class="advanced hidden">The result XPath is the XPath leading to each
+      individual result of the search engine. The result XPath should match all
+      results of the engine, and each result html element should contain a
+      title, a link, and a summary. In order to find the XPath of an element,
+      you may use Firefox DevTools by right-clicking on the result -> Inspect
+      -> Right-click on HTML element -> Copy XPath, and removing the last
+      identifying number.</p>
+      <p class="advanced hidden">The relative title, URL, and summary XPaths
+      are all relative to the result XPath defined above. The title and summary
+      elements should have the respective text as contents, and the URL XPath
+      should be a link (&#60;a&#62;).</p>
+      <p>The timeout is how long to wait for results before closing the tab.</p>
+      <p>The cache time is how long to store results for after fetching them.</p>
+    </div>
+    <form id="engine_create_form" class="advanced hidden">
+      <h1>Add Engine</h1>
+      <table>
+        <tr> <td> Engine Name </td> <td> <input type="text" id="engine_name"> </td> </tr>
+        <tr> <td> Aliases </td> <td> <input type="text" id="engine_alias"> </td> </tr>
+        <tr> <td> Keywords </td> <td> <input type="text" id="engine_keywords"> </td> </tr>
+        <tr class="advanced hidden"> <td> Search URL </td> <td> <input type="text" id="engine_url"> </td> </tr>
+        <tr class="advanced hidden"> <td> Result XPath </td> <td> <input type="text" id="engine_xpath_res"> </td> </tr>
+        <tr class="advanced hidden"> <td> Relative Title XPath </td> <td> <input type="text" id="engine_xpath_title"> </td> </tr>
+        <tr class="advanced hidden"> <td> Relative URL XPath </td> <td> <input type="text" id="engine_xpath_url"> </td> </tr>
+        <tr class="advanced hidden"> <td> Relative Summary XPath </td> <td> <input type="text" id="engine_xpath_summary"> </td> </tr>
+        <tr> <td> Timeout (ms) </td> <td> <input type="number" id="engine_timeout" min="0" step="100"> </td> </tr>
+        <tr> <td> Cache time (ms) </td> <td> <input type="number" id="engine_ttl" min="0" step="1000"> </td> </tr>
+        <tr> <td> </td> <td> <button type="submit">Save</button> </td> </tr>
+      </table>
+    </form>
+    <h1>Installed Engines</h1>
+    <button id="restore_engines">Restore Default Engines</button>
+    <div id="engines"></div>
+    <script src="browser-polyfill.min.js"></script>
+    <script src="options.js" type="module"></script>
+  </body>
+</html>
