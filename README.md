@@ -16,6 +16,8 @@ The Metasearch extension looks as much as an online search engine as possible,
 and is installed as one in the browser, so it can be set as the default search
 engine.
 
+![Example search "define search"](./screenshots/usage_2.png)
+
 ## Philosophy
 
 Metasearch intends to be easy to use, private, and versatile. While general
@@ -48,3 +50,5 @@ engines but are not removed from the search query. The star (\*) keyword
 matches all queries (enabled by default for DuckDuckGo and Wikipedia). If an
 engine's keywords exist in the query, but its alias doesn't it will only be
 queried if the query does not contain any aliases.
+
+![Example search "python pandas groupby apply"](./screenshots/usage_1.png)
