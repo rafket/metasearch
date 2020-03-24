@@ -106,7 +106,7 @@ function generateCommonXPath(elements, exclude) {
         }
     }
     var xpath = common_class?'//*[contains(concat(\' \',@class,\' \'), \' ' + common_class[0] + ' \')]':'';
-    var upto = common_class?common_class[1]:minlength;
+    var upto = common_class?common_class[1]:minlength-1;
     for (var l=upto-1; l>=0; --l) {
         let unique_el = parents.slice(0, elements.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []),
             unique_ex = parents.slice(elements.length, parents.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []);
@@ -120,8 +120,11 @@ function generateCommonXPath(elements, exclude) {
                 node = unique_el[0].localName.toLowerCase() + '[' + (siblings.indexOf(unique_el[0]) + 1) + ']';
             }
         }
-        else {
+        else if (unique_el.length >= 1 && unique_el[0].localName) {
             node = unique_el[0].localName.toLowerCase();
+        }
+        else {
+            node = '*';
         }
         xpath += '/' + node;
     }
@@ -224,13 +227,12 @@ popup_dom.onload = function() {
     popup_doc.getElementById('url').innerText = location.href;
     popup_doc.getElementById('highlight_okay').addEventListener('click', function() {
         let sel = popup_doc.getSelection();
-        console.log(sel);
         if (sel.anchorNode == sel.focusNode && sel.anchorNode == popup_doc.getElementById('url').childNodes[0]) {
             var from = sel.anchorOffset, to = sel.focusOffset;
             if (from > to) {
                 [from, to] = [to, from];
             }
-            format_url = location.href.slice(0, from) + '{searchTerm}' + location.href.slice(to, location.href.length);
+            format_url = location.href.slice(0, from) + '{searchTerms}' + location.href.slice(to, location.href.length);
             popup_doc.getElementById('searchterm').innerText = format_url;
         }
     });
