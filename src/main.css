@@ -64,9 +64,14 @@ table {
   background: #fafafa;
   border: 1px solid #eaeaea;
   margin: 0.1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: inherit;
   color: rgb(46, 52, 54);
+  padding: 2px 5px 2px 5px;
+}
+
+#inactiveengines button:hover {
+    background: #eaeaea;
 }
 
 body {
@@ -82,6 +87,7 @@ body {
   height: 2.9rem;
   border: 1px solid #cacaca;
   display: inline-block;
+  border-radius: 5px;
 }
 
 #searchbar::-webkit-search-cancel-button {
@@ -96,6 +102,7 @@ body {
   height: 100%;
   border: none !important;
   outline: none;
+  border-radius: 5px 0 0 5px;
 }
 
 #searchbutton {
@@ -109,6 +116,11 @@ body {
   border: none;
   text-align: center;
   background: #f6f5f4;
+  border-radius: 0 5px 5px 0;
+}
+
+#searchbutton:hover {
+  background: #e6e5e4;
 }
 
 #header {
@@ -134,6 +146,9 @@ body {
   margin-left: 5%;
   margin-bottom: 10%;
   width: 90%;
+  border: 1px solid #cccccc;
+  border-radius: 5px 5px 5px 5px;
+  padding: 1rem;
 }
 
 #inactiveengines:empty {
@@ -142,17 +157,19 @@ body {
 
 @media (min-width: 50em) {
   #inactiveengines {
-    max-width: 40%;
+    max-width: 35%;
     margin-left: 0;
   }
 
   #searchresults {
-    max-width: 50%;
+    width: 45%;
     margin-right: 0;
+    margin-left: 10%;
   }
 
   #searchform {
-    width: 50%;
+    width: 45%;
+    margin-left: 10%;
   }
 
   #header a {
@@ -162,10 +179,18 @@ body {
 
 #inactiveengines h2 {
   margin-top: 0;
-  color: #4c4c4c;
-  font-weight: bold;
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
+  color: #3c3c3c;
+  font-weight: normal;
+  font-size: 1.2em;
+  display: block;
+  border-bottom: 1px solid #cacaca;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: -1rem;
+  margin-bottom: 1em;
+  padding: inherit;
+  background: #fafafa;
+  border-radius: 5px 5px 0 0;
 }
 
 .result_url {

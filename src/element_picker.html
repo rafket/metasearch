@@ -13,23 +13,38 @@ pre {
 button {
   background: #fafafa;
   border: 1px solid #eaeaea;
-  margin: 0.1rem;
   font-size: 1rem;
   font-family: inherit;
   color: rgb(46, 52, 54);
+}
+
+button:hover {
+  background: #eaeaea;
+}
+
+#submit {
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 3rem;
+}
+
+.block {
+  margin-bottom: 1rem;
 }
 
 #popup {
   height: 90%;
   width: 90%;
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0.5rem;
+  top: 0.5rem;
   background: #fafafa;
-  border: solid black 1px;
-  padding: 0.5em;
+  border: solid #cacaca 1px;
+  box-sizing: border-box;
+  box-shadow: 0 0 0.25rem 0.25rem #dadada;
   overflow-y: scroll;
   z-index: 1;
+  padding: 0.5rem;
 }
 
 html, body {
@@ -44,24 +59,35 @@ html, body {
       <p>Select the results, and each result's title, URL, and summary. The URL
       must always be a link (&#60;a&#62;). You may click on elements to exclude
       them from the results. Use Ctrl-scroll to move to parent elements.</p>
+      <div class='block'>
       <p>Results:</p>
       <pre id='results'>(none)</pre>
       <button id='result_add'>Add</button>
       <button id='result_remove'>Remove</button>
+      </div>
+      <div class='block'>
       <p>Exclude from Results:</p>
       <pre id='exclude'>(none)</pre>
+      </div>
+      <div class='block'>
       <p>Result XPath:</p>
       <pre id='result_xpath'>(none)</pre>
+      </div>
+      <div class='block'>
       <p>Title XPath:</p>
       <pre id='title_xpath'>(none)</pre>
       <button id='title_select'>Select</button>
+      </div>
+      <div class='block'>
       <p>URL XPath:</p>
       <pre id='url_xpath'>(none)</pre>
       <button id='url_select'>Select</button>
+      </div>
+      <div class='block'>
       <p>Summary XPath:</p>
       <pre id='summary_xpath'>(none)</pre>
       <button id='summary_select'>Select</button>
-      <br> <br>
+      </div>
       <button id='submit'>Submit</button>
     </div>
   </body>

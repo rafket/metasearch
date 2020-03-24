@@ -84,7 +84,7 @@ function updateResults(results) {
 
 function performSearch(search_term) {
     var h2 = document.createElement("h2");
-    h2.appendChild(document.createTextNode("Enable inactive engine:"));
+    h2.appendChild(document.createTextNode("Enable inactive engine"));
     document.getElementById('inactiveengines').appendChild(h2);
     engines_promise.then(function(engines) {
         let contains_alias = engines.reduce((acum, cur) => (acum || checkAlias(cur, search_term)), false);
