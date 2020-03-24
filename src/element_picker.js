@@ -105,9 +105,28 @@ function generateCommonXPath(elements, exclude) {
             break;
         }
     }
-    if (common_class) {
-        return '//*[contains(concat(\' \',@class,\' \'), \' ' + common_class[0] + ' \')]' + createXPathFromElement(parents[0][0], null, common_class[1]);
+    var xpath = common_class?'//*[contains(concat(\' \',@class,\' \'), \' ' + common_class[0] + ' \')]':'';
+    var upto = common_class?common_class[1]:minlength;
+    for (var l=upto-1; l>=0; --l) {
+        let unique_el = parents.slice(0, elements.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []),
+            unique_ex = parents.slice(elements.length, parents.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []);
+        var node;
+        if (unique_el.length == 1) {
+            var siblings = [...unique_el[0].parentNode.childNodes].filter((s) => s.localName == unique_el[0].localName);
+            if (siblings.length == 1) {
+                node = unique_el[0].localName.toLowerCase();
+            }
+            else {
+                node = unique_el[0].localName.toLowerCase() + '[' + (siblings.indexOf(unique_el[0]) + 1) + ']';
+            }
+        }
+        else {
+            node = unique_el[0].localName.toLowerCase();
+        }
+        xpath += '/' + node;
     }
+
+    return xpath;
 }
 
 document.onscroll = () => updateResultXPath();
@@ -134,7 +153,9 @@ function updateResultXPath() {
         if (!is_selecting) {
             highlight_path.style.setProperty('pointer-events', 'auto', 'important');
             highlight_path.addEventListener('click', function() {
-                exclude.push(el);
+                if (!exclude.includes(el)) {
+                    exclude.push(el);
+                }
                 results = results.filter(u => u !== el);
                 result_xpath = generateCommonXPath(results, exclude);
                 updateResultXPath();
@@ -219,7 +240,9 @@ popup_dom.onload = function() {
     popup_doc.getElementById('result_add').addEventListener('click', function() {
         popup_dom.style.display = 'none';
         selectElement(function(el) {
-            results.push(el);
+            if (!results.includes(el)) {
+                results.push(el);
+            }
             exclude = exclude.filter(u => u !== el);
             result_xpath = generateCommonXPath(results, exclude);
             updateResultXPath();
@@ -232,7 +255,13 @@ popup_dom.onload = function() {
         results.pop();
         result_xpath = generateCommonXPath(results, exclude);
         updateResultXPath();
-        popup_doc.getElementById('results').innerText = results.map((r) => createXPathFromElement(r, undefined)).join('\n');
+        popup_doc.getElementById('results').innerText = results&&results.length>0?results.map((r) => createXPathFromElement(r, null)).join('\n'):'(none)';
+    });
+    popup_doc.getElementById('exclude_remove').addEventListener('click', function() {
+        exclude.pop();
+        result_xpath = generateCommonXPath(results, exclude);
+        updateResultXPath();
+        popup_doc.getElementById('exclude').innerText = exclude&&exclude.length>0?exclude.map((r) => createXPathFromElement(r, null)).join('\n'):'(none)';
     });
     attrs.forEach(function(attr) {
         popup_doc.getElementById(attr + '_select').addEventListener('click', function() {
