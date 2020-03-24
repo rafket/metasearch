@@ -62,9 +62,9 @@ function selectElement(callback) {
         }
     }
 
-    document.addEventListener('mousemove', mouseMove);
-    document.addEventListener('wheel', mouseWheel);
-    overlay_dom.addEventListener('click', mouseClick);
+    document.addEventListener('mousemove', mouseMove, {passive: false});
+    document.addEventListener('wheel', mouseWheel, {passive: false});
+    overlay_dom.addEventListener('click', mouseClick, {passive: false});
 }
 
 function createXPathFromElement(el, upto=undefined, nlevels=100000) {
@@ -111,7 +111,7 @@ function generateCommonXPath(elements, exclude) {
         let unique_el = parents.slice(0, elements.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []),
             unique_ex = parents.slice(elements.length, parents.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []);
         var node;
-        if (unique_el.length == 1) {
+        if (unique_el.length == 1 && unique_el[0].parentNode) {
             var siblings = [...unique_el[0].parentNode.childNodes].filter((s) => s.localName == unique_el[0].localName);
             if (siblings.length == 1) {
                 node = unique_el[0].localName.toLowerCase();
