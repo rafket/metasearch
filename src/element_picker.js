@@ -197,23 +197,6 @@ function getRelativeResultXPath(el) {
     return undefined;
 }
 
-function findArgument(url) {
-    var urlobj = new URL(url);
-    var params = urlobj.searchParams; //new URLSearchParams(urlobj.search);
-    var entry = [undefined, undefined];
-    var entries = (typeof params.entries()[Symbol.iterator] === 'function')?params.entries():params.entries().wrappedJSObject;
-    for (var cur of entries) {
-        if (document.documentElement.innerText.split(cur[1]).length > document.documentElement.innerText.split(entry[1]).length) {
-            entry = cur;
-        }
-    }
-    if (entry[0]) {
-        params.set(entry[0], '{searchTerms}');
-        return urlobj.protocol + '//' + urlobj.host + urlobj.pathname + '?' + params.toString();
-    }
-    return url;
-}
-
 var popup_dom = document.createElement('iframe'),
     overlay_dom = document.createElement('metasearch-overlay'),
     attrs = ['title', 'url', 'summary'],
@@ -222,6 +205,7 @@ var popup_dom = document.createElement('iframe'),
     exclude = [],
     result_xpath,
     attr_xpath = {},
+    format_url,
     is_selecting = false;
 
 overlay_dom.style = 'background: transparent none repeat scroll 0% 0% !important; border: 0px none !important; border-radius: 0px !important; box-shadow: none !important; display: block !important; height: 100% !important; left: 0px !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; outline: currentcolor none 0px !important; padding: 0px !important; position: fixed !important; top: 0px !important; visibility: visible !important; width: 100% !important; z-index: 0;';
@@ -237,6 +221,19 @@ popup_dom.onload = function() {
     popup_dom.style.setProperty('pointer-events', 'auto', 'important');
     popup_dom.style.display = 'block';
     popup_doc = popup_dom.contentDocument;
+    popup_doc.getElementById('url').innerText = location.href;
+    popup_doc.getElementById('highlight_okay').addEventListener('click', function() {
+        let sel = popup_doc.getSelection();
+        console.log(sel);
+        if (sel.anchorNode == sel.focusNode && sel.anchorNode == popup_doc.getElementById('url').childNodes[0]) {
+            var from = sel.anchorOffset, to = sel.focusOffset;
+            if (from > to) {
+                [from, to] = [to, from];
+            }
+            format_url = location.href.slice(0, from) + '{searchTerm}' + location.href.slice(to, location.href.length);
+            popup_doc.getElementById('searchterm').innerText = format_url;
+        }
+    });
     popup_doc.getElementById('result_add').addEventListener('click', function() {
         popup_dom.style.display = 'none';
         selectElement(function(el) {
@@ -274,7 +271,7 @@ popup_dom.onload = function() {
         });
     });
     popup_doc.getElementById('submit').addEventListener('click', function() {
-        browser.runtime.sendMessage({open_tab: {url: browser.runtime.getURL('options.html') + '?engine_xpath_res='+encodeURIComponent(result_xpath)+'&engine_xpath_title='+encodeURIComponent(attr_xpath['title'])+'&engine_xpath_url='+encodeURIComponent(attr_xpath['url'])+'&engine_xpath_summary='+encodeURIComponent(attr_xpath['summary'])+'&engine_name='+encodeURIComponent(document.title)+'&engine_url='+encodeURIComponent(findArgument(location.href))+'&engine_timeout=3000&engine_ttl=300000', active: true}}).then(
+        browser.runtime.sendMessage({open_tab: {url: browser.runtime.getURL('options.html') + '?engine_xpath_res='+encodeURIComponent(result_xpath)+'&engine_xpath_title='+encodeURIComponent(attr_xpath['title'])+'&engine_xpath_url='+encodeURIComponent(attr_xpath['url'])+'&engine_xpath_summary='+encodeURIComponent(attr_xpath['summary'])+'&engine_name='+encodeURIComponent(popup_doc.getElementById('name').value)+'&engine_url='+encodeURIComponent(format_url)+'&engine_timeout=3000&engine_ttl=300000', active: true}}).then(
             () => browser.runtime.sendMessage({kill_me: true})
         );
     });

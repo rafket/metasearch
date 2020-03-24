@@ -8,6 +8,7 @@ p {
 pre {
   font-size: 0.8rem;
   white-space: normal;
+  word-break: break-all;
 }
 
 button {
@@ -56,6 +57,19 @@ html, body {
 }
 </style>
     <div id='popup'>
+      <p>Select a name for the engine, and locate the search term in the
+      URL.</p>
+      <div class='block'>
+      <p>Name:</p>
+      <input type='text' id='name'></input>
+      </div>
+      <div class='block'>
+      <p>Highlight search term from URL:</p>
+      <pre id='url'>(none)</pre>
+      <button id='highlight_okay'>Okay</button>
+      <p>Processed URL:</p>
+      <pre id='searchterm'>(none)</pre>
+      </div>
       <p>Select the results, and each result's title, URL, and summary. The URL
       must always be a link (&#60;a&#62;). You may click on elements to exclude
       them from the results. Use Ctrl-scroll to move to parent elements.</p>
