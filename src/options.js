@@ -1,10 +1,10 @@
-import {addEngine, getDefaultEngines, getEngineSpec, removeEngine} from './storage.js';
+import {addEngine, getDefaultEngines, getEngineSpec, removeEngine} from "./storage.js";
 var ID_TO_ADD = Math.random().toString(36).substr(2, 9);
 
 function highlightSearch(url, engine) {
     return browser.tabs.create({"url": url, "active": true}).then(
-        tab => fetch('element_picker.js').then(response => response.text()).then(
-            preamble => browser.tabs.executeScript(tab.id, {file: 'browser-polyfill.min.js'}).then(
+        tab => fetch("element_picker.js").then(response => response.text()).then(
+            preamble => browser.tabs.executeScript(tab.id, {file: "browser-polyfill.min.js"}).then(
                 () => browser.tabs.executeScript(tab.id, {
                     code: preamble + `
                     result_xpath = "${engine.xpath_result}";
@@ -12,7 +12,7 @@ function highlightSearch(url, engine) {
                     attr_xpath["url"] = "${engine.xpath_url}";
                     attr_xpath["summary"] = "${engine.xpath_summary}";
                     is_selecting = true;
-                    overlay_dom.style.setProperty('pointer-events', 'none', 'important');
+                    overlay_dom.style.setProperty("pointer-events", "none", "important");
                     popup_dom.onload=() => {
                         popup_dom.style.display="none";
                         popup_doc = popup_dom.contentDocument;
@@ -114,7 +114,7 @@ getEngineSpec().then(function(engines) {
     });
 
     var params = new URL(location.href).searchParams;
-    ['engine_name', 'engine_alias', 'engine_keywords', 'engine_url', 'engine_xpath_res', 'engine_xpath_title', 'engine_xpath_url', 'engine_xpath_summary', 'engine_timeout', 'engine_ttl'].forEach(function(param) {
+    ["engine_name", "engine_alias", "engine_keywords", "engine_url", "engine_xpath_res", "engine_xpath_title", "engine_xpath_url", "engine_xpath_summary", "engine_timeout", "engine_ttl"].forEach(function(param) {
         if (params.get(param)) {
             document.getElementById(param).value = decodeURIComponent(params.get(param));
             let advancedDom = document.getElementsByClassName("advanced");

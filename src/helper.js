@@ -10,7 +10,7 @@ function extractXPaths(xpath_result, xpath_sub, retries=10) {
     var results = [];
     for (var i=0; i<xpath_eval.snapshotLength; i++) {
         let result = xpath_eval.snapshotItem(i);
-        var tmp = {}
+        var tmp = {};
         for (let key in xpath_sub) {
             tmp[key] = document.evaluate(xpath_sub[key], result, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         }
@@ -20,11 +20,11 @@ function extractXPaths(xpath_result, xpath_sub, retries=10) {
 }
 
 function getXPath(xpath_result, xpath_title, xpath_url, xpath_summary) {
-    return extractXPaths(xpath_result, {'title': xpath_title, 'url': xpath_url, 'summary': xpath_summary}, 0).then(function(elements) {
+    return extractXPaths(xpath_result, {"title": xpath_title, "url": xpath_url, "summary": xpath_summary}, 0).then(function(elements) {
         var results = [];
         elements.forEach(function (el, i) {
-            if (el['title'] != null && el['title'].innerText) {
-                results.push({'title': el['title'].innerText, 'url': (el['url'] || window.location).href, 'summary': (el['summary'] || {'innerText': ''}).innerText || '', 'score': i/elements.length});
+            if (el["title"] != null && el["title"].innerText) {
+                results.push({"title": el["title"].innerText, "url": (el["url"] || window.location).href, "summary": (el["summary"] || {"innerText": ""}).innerText || "", "score": i/elements.length});
             }
         });
         return results;
@@ -34,16 +34,16 @@ function getXPath(xpath_result, xpath_title, xpath_url, xpath_summary) {
 browser.runtime.onConnect.addListener(function(port) {
     var prev_resp = null;
     port.onMessage.addListener(function(m) {
-        browser.runtime.sendMessage({'timeout': m.timeout});
+        browser.runtime.sendMessage({"timeout": m.timeout});
         const sendXPath = function() {
             getXPath(m.xpath_result, m.xpath_title, m.xpath_url, m.xpath_summary).then(
                 function(resp) {
                     if (resp !== prev_resp) {
-                        port.postMessage({'resp': resp});
+                        port.postMessage({"resp": resp});
                         prev_resp = resp;
                     }
                 }, function(err) {
-                    port.postMessage({'error': err});
+                    port.postMessage({"error": err});
                 });
         };
         sendXPath();

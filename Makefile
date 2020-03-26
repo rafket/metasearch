@@ -1,9 +1,12 @@
 all: firefox chromium
 
-firefox:
+lint:
+	eslint ./src
+
+firefox: lint
 	./package.sh firefox
 
-chromium:
+chromium: lint
 	./package.sh chromium
 
 run-firefox: firefox

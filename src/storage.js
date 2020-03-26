@@ -34,11 +34,11 @@ export function removeEngine(id) {
 }
 
 export function getDefaultEngines() {
-    return fetch('default_engines.json').then(response => response.json());
+    return fetch("default_engines.json").then(response => response.json());
 }
 
 function genCacheKey(eid, url) {
-    return 'cache:' + btoa(eid) + ':' + btoa(url);
+    return "cache:" + btoa(eid) + ":" + btoa(url);
 }
 
 export function addCache(engine, url, contents) {
