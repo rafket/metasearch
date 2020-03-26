@@ -97,16 +97,26 @@ function generateCommonXPath(elements, exclude) {
         minlength = curpar.length<minlength?curpar.length:minlength;
         parents.push(curpar);
     });
-    var common_class = null;
+    var class_inc_exc = null;
     for (var l=0; l<minlength; ++l) {
-        let class_eq = parents.reduce((acc, cur, idx) => idx==0?[...cur[l].classList]:(idx<elements.length?acc.filter(v => [...cur[l].classList].includes(v)):acc.filter(v => ![...cur[l].classList].includes(v))), []);
+        let class_include = parents.slice(0, elements.length).reduce((acc, cur, idx) => idx==0?[...cur[l].classList]:acc.filter(v => [...cur[l].classList].includes(v)), []),
+            class_exclude = parents.slice(elements.length, parents.length).reduce((acc, cur) => [...acc, ...[...cur[l].classList].filter(v => !acc.includes(v))], []);
+        let class_eq = class_include.filter(v => !class_exclude.includes(v)),
+            class_neq = class_exclude.filter(v => !class_include.includes(v));
+        console.log(class_include, class_exclude, class_eq, class_neq);
         if (class_eq.length > 0) {
-            common_class = [class_eq[0], l];
+            class_inc_exc = [class_eq, class_exclude, l];
+            break;
+        }
+        else if (class_neq.length > 0) {
+            class_inc_exc = [class_include, class_neq, l];
             break;
         }
     }
-    var xpath = common_class?'//*[contains(concat(\' \',@class,\' \'), \' ' + common_class[0] + ' \')]':'';
-    var upto = common_class?common_class[1]:minlength-1;
+    var class_selector = class_inc_exc?[...class_inc_exc[0], ...class_inc_exc[1]].map((c, i) => (i<class_inc_exc[0].length?'(':'not(') + 'contains(concat(\' \',@class,\' \'), \' ' + c + ' \'))').join(' and '):null;
+    console.log(class_selector);
+    var xpath = class_selector?'//*[' + class_selector + ']':'';
+    var upto = class_inc_exc?class_inc_exc[2]:minlength-1;
     for (var l=upto-1; l>=0; --l) {
         let unique_el = parents.slice(0, elements.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []),
             unique_ex = parents.slice(elements.length, parents.length).reduce((acc, cur, idx) => idx==0?[cur[l]]:(acc.includes(cur[l])?acc:[...acc,cur[l]]), []);
