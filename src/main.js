@@ -25,7 +25,9 @@ function get(url, engine, hidden) {
                         return function(callback_succ, callback_err) {
                             port.onMessage.addListener(function(r) {
                                 if (r.resp) {
-                                    addCache(engine, url, r.resp);
+                                    if (r.resp.length > 0) {
+                                        addCache(engine, url, r.resp);
+                                    }
                                     callback_succ(r.resp);
                                 }
                                 else {
