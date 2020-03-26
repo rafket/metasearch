@@ -174,7 +174,7 @@
     "alias": "google",
     "keywords": "",
     "baseurl": "https://www.google.com/search?q={searchTerms}",
-    "xpath_result": "//*[contains(concat(' ',@class,' '), ' srg ')]/div/div",
+    "xpath_result": "//*[contains(concat(' ',@class,' '), ' rc ')]",
     "xpath_title": ".//div[1]/a/h3",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]/div/span",
@@ -193,5 +193,18 @@
     "xpath_summary": ".//a[2]/p",
     "timeout": 5000,
     "ttl": 300000
+  },
+  {
+    "id": "default_archforums",
+    "name": "Arch Forums",
+    "alias": "archforums",
+    "keywords": "arch,linux",
+    "baseurl": "https://bbs.archlinux.org/search.php?action=search&keywords={searchTerms}&author=&search_in=-1&sort_by=0&sort_dir=DESC&show_as=posts&search=Submit",
+    "xpath_result": "//*[(contains(concat(' ',@class,' '), ' blockpost ')) and (contains(concat(' ',@class,' '), ' firstpost '))]",
+    "xpath_title": "./h2/span/span[3]/a",
+    "xpath_url": "./h2/span/span[3]/a",
+    "xpath_summary": "./div/div[1]/div/div[2]/div",
+    "timeout": 30000,
+    "ttl": 604800000
   }
 ]
