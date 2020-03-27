@@ -206,5 +206,18 @@
     "xpath_summary": "./div/div[1]/div/div[2]/div",
     "timeout": 30000,
     "ttl": 604800000
+  },
+  {
+    "id": "default_bing",
+    "name": "Bing",
+    "alias": "bing_search",
+    "keywords": "",
+    "baseurl": "https://www.bing.com/search?q={searchTerms}",
+    "xpath_result": "//*[(contains(concat(' ',@class,' '), ' b_algo '))]",
+    "xpath_title": "./h2/a",
+    "xpath_url": "./h2/a",
+    "xpath_summary": "./div/p",
+    "timeout": 3000,
+    "ttl": 300000
   }
 ]
