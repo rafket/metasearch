@@ -154,7 +154,7 @@ function shouldQueryEngine(engine, search_term, check_alias) {
     var ans = false;
     search_term.split(" ").forEach(function(word) {
         engine.keywords.split(",").forEach(function(keyword) {
-            if (word.toLowerCase() === keyword || keyword === "*") {
+            if (keyword.length > 0 && (word.toLowerCase() === keyword || keyword === "*")) {
                 ans = true;
             }
         });
