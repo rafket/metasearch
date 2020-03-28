@@ -2,7 +2,8 @@ let MAX_CACHE = 100;
 
 export function getEngineSpec() {
     return browser.storage.sync.get("engines")
-        .then(res => res.engines?res.engines.map(sanitizeEngine):getDefaultEngines());
+        .then(res => res.engines?res.engines.map(sanitizeEngine):getDefaultEngines())
+        .then(res => res.sort((a,b) => a.name<b.name?-1:1));
 }
 
 function sanitizeEngine(engine) {
