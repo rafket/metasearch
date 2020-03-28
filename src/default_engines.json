@@ -239,7 +239,7 @@
     "alias": "gsch",
     "keywords": "",
     "baseurl": "https://scholar.google.com/scholar?q={searchTerms}",
-    "xpath_result": "//*[(contains(concat(' ',@class,' '), ' gs_scl '))]",
+    "xpath_result": "//*[(contains(concat(' ',@class,' '), ' gs_or '))]",
     "xpath_title": "./div/h3/a",
     "xpath_url": ".//a",
     "xpath_summary": "./div/div[2]",
