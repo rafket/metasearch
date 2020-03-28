@@ -19,6 +19,9 @@ function selectElement(callback) {
     highlight.appendChild(highlight_path);
     overlay_dom.appendChild(highlight);
     const mouseMove = function(ev) {
+        if (!highlight.parentNode) {
+            overlay_dom.appendChild(highlight);
+        }
         overlay_dom.style.setProperty("pointer-events", "none", "important");
         var cur = document.elementFromPoint(ev.clientX, ev.clientY);
         overlay_dom.style.setProperty("pointer-events", "auto", "important");
