@@ -219,5 +219,31 @@
     "xpath_summary": "./div/p",
     "timeout": 3000,
     "ttl": 300000
+  },
+  {
+    "id": "default_se",
+    "name": "Stack Exchange",
+    "alias": "se",
+    "keywords": "",
+    "baseurl": "https://stackexchange.com/search?q={searchTerms}",
+    "xpath_result": "//*[(contains(concat(' ',@class,' '), ' summary '))]",
+    "xpath_title": "./div[1]/span/a",
+    "xpath_url": "./div[1]/span/a",
+    "xpath_summary": "./div[2]",
+    "timeout": 5000,
+    "ttl": 86395000
+  },
+  {
+    "id": "default_gsch",
+    "name": "Google Scholar",
+    "alias": "gsch",
+    "keywords": "",
+    "baseurl": "https://scholar.google.com/scholar?q={searchTerms}",
+    "xpath_result": "//*[(contains(concat(' ',@class,' '), ' gs_scl '))]",
+    "xpath_title": "./div/h3/a",
+    "xpath_url": ".//a",
+    "xpath_summary": "./div/div[2]",
+    "timeout": 5000,
+    "ttl": 86400000
   }
 ]
