@@ -1,0 +1,5 @@
+<OpenSearchDescription>
+  <ShortName>Metasearch</ShortName>
+  <Description>Metasearch is a search engine aggregator</Description>
+  <Url type="text/html" method="get" template="https://metasearch?q={searchTerms}"/>
+</OpenSearchDescription>
