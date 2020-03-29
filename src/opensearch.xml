@@ -1,4 +1,4 @@
-<OpenSearchDescription>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName>Metasearch</ShortName>
   <Description>Metasearch is a search engine aggregator</Description>
   <Url type="text/html" method="get" template="https://metasearch?q={searchTerms}"/>
