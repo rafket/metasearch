@@ -143,9 +143,9 @@ body {
   float: right;
   margin-right: 2%;
   display: block;
-  margin-left: 5%;
+  margin-left: 2%;
   margin-bottom: 10%;
-  width: 90%;
+  width: auto;
   border: 1px solid #cccccc;
   border-radius: 5px 5px 5px 5px;
   padding: 1rem;
