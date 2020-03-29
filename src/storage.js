@@ -1,4 +1,4 @@
-let MAX_CACHE = 100;
+let MAX_CACHE = 500;
 
 export function getEngineSpec() {
     return browser.storage.sync.get("engines")
@@ -42,6 +42,11 @@ function genCacheKey(eid, url) {
     return "cache:" + btoa(eid) + ":" + btoa(url);
 }
 
+function revCacheKey(key) {
+    let spl = key.split(":");
+    return {eid: atob(spl[1]), url: atob(spl[2])};
+}
+
 export function addCache(engine, url, contents) {
     return reapCache().then(() => browser.storage.local.set({
         [genCacheKey(engine.id, url)]: {ts: Date.now(), contents: contents, ttl: engine.ttl}
@@ -53,6 +58,22 @@ export function getCache(engine, url) {
     return browser.storage.local.get(key)
         .then(res => res[key])
         .then(res => (res && res.ts + res.ttl > Date.now())?res.contents:null);
+}
+
+function exportCache() {
+    return browser.storage.local.get()
+        .then(res => Object.entries(res)
+            .filter(el => el[0].startsWith("cache:"))
+            .map(el => ({info: revCacheKey(el[0]), data: el[1]}))
+        );
+}
+
+export function downloadCache() {
+    return exportCache()
+        .then(res => JSON.stringify(res, null, 2))
+        .then(res => new Blob([res], {type: "text/json"}))
+        .then(res => URL.createObjectURL(res))
+        .then(res => window.open(res));
 }
 
 function reapCache() {
