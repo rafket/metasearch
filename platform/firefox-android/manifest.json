@@ -1,0 +1,33 @@
+{
+  "author": "Rafael Ketsetsides",
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "61.0",
+      "id": "{636dd0cd-a140-44ff-b319-3bc70fbdb486}"
+    }
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": ["browser-polyfill.min.js", "background.js"]
+  },
+  "description": "Metasearch is a search engine aggregator.",
+  "manifest_version": 2,
+  "name": "Metasearch",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "Metasearch"
+  },
+  "version": "1.3.2"
+}

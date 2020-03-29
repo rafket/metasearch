@@ -3,7 +3,7 @@
 platform="$1"
 dir=$(mktemp -d)
 cp -r ./src/* "$dir"
-cp -r ./platform/$platform/* "$dir"
+cp -rf ./platform/$platform/* "$dir"
 cp LICENSE.md "$dir"
 curl https://unpkg.com/webextension-polyfill@0.6.0/dist/browser-polyfill.min.js -s -o "$dir/browser-polyfill.min.js"
 

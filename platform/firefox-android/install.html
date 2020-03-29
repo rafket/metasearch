@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Welcome to Metasearch</title>
+    <link rel='icon' href='img/icon.svg' type='image/svg+xml'/>
+    <link rel='stylesheet' type='text/css' href='install.css'>
+  </head>
+  <body>
+    <h1>Welcome to Metasearch!</h1>
+    <p>Metasearch is a meta-search engine in the form of an extension. It
+    aggregates results from online search engines, that can either be general
+    (such as DuckDuckGo) or domain-specific (such as IMDb). All of these
+    results are fetched through your browser (as separate tabs opened by the
+    extension), so there is no centralized "Metasearch" service. This means
+    that you are no more anonymous than if you were directly accessing these
+    websites, but it also makes it very easy to access login-bound search
+    engines such as library websites.</p>
+    <p>Metasearch can be accessed by clicking the browser-action button on the
+    top-right. It is also added as a search engine, and you can set it as the
+    default. To edit search engines, navigate to the
+    <a href='options.html'>options page</a> by either clicking the link next to
+    the search bar, or going to the addon preferences (about:addons &rarr;
+    click on metasearch &rarr; Preferences in Firefox). To add search engines,
+    it is recommended to use the graphical helper. Perform a search on any
+    website, and then right-click on the Metasearch icon &rarr; Add current
+    page as engine.</p>
+    <p>In order to improve user experience, each engine is associated with a
+    set of aliases and keywords (configured through the options page). Aliases
+    (such as ddg for DuckDuckGo) enable the associated engines and are removed
+    from the search query. If the search query contains any aliases, only the
+    engines that contain at least one of these aliases are queried. Different
+    engines may share aliases (both Merriam-Webster and Wiktionary share the
+    "define" alias), and the same engine may have multiple aliases (IMDb has
+    the aliases "movie", "tv", and "imdb"). Keywords (such as "python" for
+    StackOverflow) enable the associated engines but are not removed from the
+    search query. The star (*) keyword matches all queries (enabled by default
+    for DuckDuckGo and Wikipedia). If an engine's keywords exist in the query,
+    but its alias doesn't it will only be queried if the query does not contain
+    any aliases.</p>
+    <p>Below are some queries for you to try out the default search engines.
+    Aliases are colored in green, while keywords are colored in red.</p>
+    <p>
+    "<a href='/main.html?q=define%20python'><span class='alias'>define</span> <span class='keyword'>python</span></a>"<br>
+    "<a href='/main.html?q=kaos%20movie'>kaos <span class='alias'>movie</span></a>"<br>
+    "<a href='/main.html?q=cpp%20generate%20random%20numbers'><span class='keyword'>cpp</span> generate random numbers</a>"<br>
+    "<a href='/main.html?q=hn%20reddit_search%20gpt2'><span class='alias'>hn</span> <span class='alias'>reddit_search</span> gpt2</a>"<br>
+    "<a href='/main.html?q=what%20is%20startpage%20spg'>what is startpage <span class='alias'>spg</span></a>"
+    </p>
+    <script src='install.js'></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+p {
+  width: 90%;
+}
+
+h1 {
+  color: #4c4c4c;
+}
+
+.keyword {
+  color: red;
+}
+
+.alias {
+  color: green;
+}
+
+a {
+  color: black;
+}
+
+body {
+  font-size: 2em;
+}
