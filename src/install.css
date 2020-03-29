@@ -18,3 +18,13 @@ h1 {
 a {
   color: black;
 }
+
+@media (max-width: 50em) {
+  p {
+    width: 90%;
+  }
+
+  body {
+    font-size: 2em;
+  }
+}

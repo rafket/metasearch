@@ -15,8 +15,8 @@ chromium: lint
 run-firefox: firefox
 	./run.sh metasearch-firefox.zip firefox-desktop
 
-run-firefox-android: firefox-android
-	./run.sh metasearch-firefox-android.zip firefox-android $(args)
+run-firefox-android: firefox
+	./run.sh metasearch-firefox.zip firefox-android $(args)
 
 run-chromium: chromium
 	./run.sh metasearch-chromium.zip chromium

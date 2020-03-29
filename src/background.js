@@ -30,6 +30,8 @@ browser.runtime.onMessage.addListener(
 browser.runtime.onInstalled.addListener(function(details) {
     if (details.reason == "install") {
         browser.tabs.create({"url": "/install.html"});
+        browser.runtime.getBrowserInfo()
+            .then(info => {if (info.name == "Fennec") window.external.AddSearchProvider("https://raw.githubusercontent.com/rafket/metasearch/master/src/opensearch.xml");});
     }
 });
 
