@@ -19,7 +19,7 @@ a {
   color: black;
 }
 
-@media (max-width: 50em) {
+@media (max-device-width: 480px) {
   p {
     width: 90%;
   }
