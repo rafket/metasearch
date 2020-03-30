@@ -85,6 +85,7 @@ function updateResults(results) {
 }
 
 function performSearch(search_term) {
+    document.title = search_term + " - Metasearch";
     var h2 = document.createElement("h2");
     h2.appendChild(document.createTextNode("Enable inactive engine"));
     document.getElementById("inactiveengines").appendChild(h2);
