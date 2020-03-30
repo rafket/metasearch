@@ -106,6 +106,7 @@ function performSearch(search_term) {
 function addUnusedEngine(engine, sanitized_search) {
     var button = document.createElement("button");
     button.appendChild(document.createTextNode(engine.name));
+    button.title = engine.alias;
     button.addEventListener("click", function() {
         searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine, true).catch(console.log);
         document.getElementById("inactiveengines").removeChild(button);
