@@ -174,7 +174,7 @@
     "alias": "ggl",
     "keywords": "",
     "baseurl": "https://www.google.com/search?q={searchTerms}",
-    "xpath_result": "//*[contains(concat(' ',@class,' '), ' rc ')]",
+    "xpath_result": "//*[contains(concat(' ',@class,' '), ' s ') and .//text()]/..",
     "xpath_title": ".//div[1]/a/h3",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]/div/span",
