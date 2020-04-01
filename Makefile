@@ -6,9 +6,6 @@ lint:
 firefox: lint
 	./package.sh firefox
 
-firefox-android: lint
-	./package.sh firefox-android
-
 chromium: lint
 	./package.sh chromium
 
