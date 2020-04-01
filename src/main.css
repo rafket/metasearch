@@ -140,7 +140,6 @@ body {
 }
 
 #inactiveengines {
-  float: right;
   margin-right: 2%;
   display: block;
   margin-left: 2%;
@@ -149,6 +148,7 @@ body {
   border: 1px solid #cccccc;
   border-radius: 5px 5px 5px 5px;
   padding: 1rem;
+  float: none;
 }
 
 #inactiveengines:empty {
@@ -159,6 +159,7 @@ body {
   #inactiveengines {
     max-width: 35%;
     margin-left: 0;
+    float: right;
   }
 
   #searchresults {
