@@ -1,11 +1,21 @@
 import {addCache, getCache, getEngineSpec} from "./storage.js";
+
 var results_global = {},
     engines_promise = getEngineSpec(),
-    params = new URL(location.href).searchParams;
+    params = new URL(location.href).searchParams,
+    searchbar_dom = document.getElementById("searchbar"),
+    searchclear_dom = document.getElementById("searchclear");
+
+const updClearIcon = () => searchclear_dom.style.display = searchbar_dom.value ? "block" : "none";
+
 if (params.get("q")) {
-    document.getElementById("searchbar").value = params.get("q");
+    searchbar_dom.value = params.get("q");
+    updClearIcon();
     performSearch(params.get("q"));
 }
+
+searchclear_dom.addEventListener("click", () => {searchbar_dom.value = ""; updClearIcon();});
+searchbar_dom.addEventListener("input", updClearIcon);
 
 function get(url, engine, hidden) {
     return getCache(engine, url).then(function(cached) {

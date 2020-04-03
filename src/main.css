@@ -88,6 +88,7 @@ body {
   border: 1px solid #cacaca;
   display: inline-block;
   border-radius: 5px;
+  position: relative;
 }
 
 #searchbar::-webkit-search-cancel-button {
@@ -121,6 +122,21 @@ body {
 
 #searchbutton:hover {
   background: #e6e5e4;
+}
+
+#searchclear {
+  position: absolute;
+  right: 3rem;
+  background: transparent;
+  height: 100%;
+  outline: none;
+  border: none;
+  padding: 0 1rem 0 1rem;
+  margin: 0;
+  color: #aaa;
+  font-size: 1.2rem;
+  font-family: monospace;
+  display: none;
 }
 
 #header {
