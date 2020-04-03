@@ -3,11 +3,8 @@ browser.browserAction.onClicked.addListener(function() {
 });
 
 browser.webRequest.onBeforeRequest.addListener(
-    function(requestDetails) {
-        browser.tabs.create({url: requestDetails.url.replace("https://metasearch/", browser.runtime.getURL("/main.html"))})
-            .then(() => browser.tabs.remove(requestDetails.tabId));
-    },
-    {urls: ["https://metasearch/*"]},
+    req => browser.tabs.update(req.tabId, {url: req.url.replace("https://metasearch/", browser.runtime.getURL("/main.html"))}),
+    {urls: ["https://metasearch/*"]}
 );
 
 browser.runtime.onMessage.addListener(
