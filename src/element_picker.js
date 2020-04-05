@@ -6,7 +6,7 @@ function drawRect(path, el) {
     path.setAttribute("height", rect.height);
 }
 
-function selectElement(callback) {
+function selectElement(callback, predicate="true()") {
     is_selecting = true;
     updateResultXPath();
     var lastElement = undefined;
@@ -18,6 +18,17 @@ function selectElement(callback) {
     highlight.style = "position: fixed !important; top: 0 !important; left: 0 !important; cursor: crosshair !important; width: 100% !important; height: 100% !important;";
     highlight.appendChild(highlight_path);
     overlay_dom.appendChild(highlight);
+    const checkAndSelect = function(el) {
+        if (document.evaluate(predicate, el, null, XPathResult.BOOLEAN_TYPE, null).booleanValue) {
+            selectedElement = el;
+            highlight.style.setProperty("cursor", "crosshair", "important");
+        }
+        else {
+            selectedElement = null;
+            highlight.style.setProperty("cursor", "not-allowed", "important");
+        }
+    };
+
     const mouseMove = function(ev) {
         if (!highlight.parentNode) {
             overlay_dom.appendChild(highlight);
@@ -29,7 +40,7 @@ function selectElement(callback) {
             levels = 0;
             drawRect(highlight_path, cur);
             lastElement = cur;
-            selectedElement = cur;
+            checkAndSelect(cur);
         }
     };
 
@@ -52,7 +63,7 @@ function selectElement(callback) {
                 }
             }
             drawRect(highlight_path, par);
-            selectedElement = par;
+            checkAndSelect(par);
         }
     };
 
@@ -283,7 +294,7 @@ popup_dom.onload = function() {
                 attr_xpath[attr] = getRelativeResultXPath(el);
                 updateResultXPath();
                 popup_dom.style.display = "block";
-            });
+            }, attr=="url"?"@href":"text()");
         });
     });
     popup_doc.getElementById("submit").addEventListener("click", function() {
