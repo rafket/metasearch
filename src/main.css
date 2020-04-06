@@ -156,9 +156,9 @@ body {
 }
 
 #inactiveengines {
-  margin-right: 2%;
+  margin-right: 5%;
   display: block;
-  margin-left: 2%;
+  margin-left: 5%;
   margin-bottom: 10%;
   width: auto;
   border: 1px solid #cccccc;
@@ -175,6 +175,7 @@ body {
   #inactiveengines {
     max-width: 35%;
     margin-left: 0;
+    margin-right: 2%;
     float: right;
   }
 
