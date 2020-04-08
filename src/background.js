@@ -9,17 +9,26 @@ browser.webRequest.onBeforeRequest.addListener(
 
 browser.runtime.onMessage.addListener(
     function(request, sender) {
-        if (request.timeout) {
-            setTimeout(() => browser.tabs.remove(sender.tab.id), request.timeout);
-        }
-        if (request.kill_me) {
-            browser.tabs.remove(sender.tab.id);
-        }
-        if (request.open_tab) {
-            return browser.tabs.create(request.open_tab);
+        if (request.update_me) {
+            return browser.tabs.update(sender.tab.id, request.update_me);
         }
         if (request.get_file) {
             return fetch(request.get_file).then(response => response.text());
+        }
+        if (request.open_engine) {
+            var tabid;
+            var prom = browser.tabs.create({url: request.open_engine.url, active: false})
+                .then(tab => {
+                    if (browser.tabs.hide) {
+                        browser.tabs.hide(tab.id);
+                    }
+                    setTimeout(() => browser.tabs.remove(tab.id), request.open_engine.timeout);
+                    tabid = tab.id;
+                })
+                .then(() => browser.tabs.executeScript(tabid, {file: "browser-polyfill.min.js"}))
+                .then(() => browser.tabs.executeScript(tabid, {file: "helper.js"}))
+                .then(() => tabid);
+            return prom;
         }
     }
 );

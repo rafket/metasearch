@@ -17,42 +17,36 @@ if (params.get("q")) {
 searchclear_dom.addEventListener("click", () => {searchbar_dom.value = ""; updClearIcon();});
 searchbar_dom.addEventListener("input", updClearIcon);
 
-function get(url, engine, hidden) {
+function get(url, engine) {
     return getCache(engine, url).then(function(cached) {
         if (cached) {
             return (callback_succ) => callback_succ(cached);
         }
         else {
-            return browser.tabs.create({"url": url, "active": false}).then(function(tab) {
-                if (hidden && browser.tabs.hide) {
-                    browser.tabs.hide(tab.id);
-                }
-                return browser.tabs.executeScript(tab.id, {file: "browser-polyfill.min.js"})
-                    .then(() =>  browser.tabs.executeScript(tab.id, {file: "helper.js"}))
-                    .then(() => {
-                        let port = browser.tabs.connect(tab.id);
-                        port.postMessage(engine);
-                        return function(callback_succ, callback_err) {
-                            port.onMessage.addListener(function(r) {
-                                if (r.resp) {
-                                    if (r.resp.length > 0) {
-                                        addCache(engine, url, r.resp);
-                                    }
-                                    callback_succ(r.resp);
+            return browser.runtime.sendMessage({open_engine: {url: url, timeout: engine.timeout}})
+                .then(tabid => {
+                    let port = browser.tabs.connect(tabid);
+                    port.postMessage(engine);
+                    return function(callback_succ, callback_err) {
+                        port.onMessage.addListener(function(r) {
+                            if (r.resp) {
+                                if (r.resp.length > 0) {
+                                    addCache(engine, url, r.resp);
                                 }
-                                else {
-                                    callback_err(r.err || r);
-                                }
-                            });
-                        };
-                    });
-            });
+                                callback_succ(r.resp);
+                            }
+                            else {
+                                callback_err(r.err || r);
+                            }
+                        });
+                    };
+                });
         }
     });
 }
 
-function searchAndAddToDom(url, engine, hidden) {
-    return get(url, engine, hidden).then(function(get_resp) {
+function searchAndAddToDom(url, engine) {
+    return get(url, engine).then(function(get_resp) {
         get_resp(function(resp) {
             resp.forEach((el) => el["engine_name"] = engine.name);
             results_global[engine.id] = resp;
@@ -104,7 +98,7 @@ function performSearch(search_term) {
         let sanitized_search = sanitizeSearch(engines, search_term);
         engines.forEach(function(engine) {
             if (shouldQueryEngine(engine, search_term, contains_alias)) {
-                searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine, true).catch(console.log);
+                searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine).catch(console.log);
             }
             else {
                 addUnusedEngine(engine, sanitized_search);
@@ -118,7 +112,7 @@ function addUnusedEngine(engine, sanitized_search) {
     button.appendChild(document.createTextNode(engine.name));
     button.title = engine.alias;
     button.addEventListener("click", function() {
-        searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine, true).catch(console.log);
+        searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine).catch(console.log);
         document.getElementById("inactiveengines").removeChild(button);
         if (document.getElementById("inactiveengines").children.length == 1) {
             document.getElementById("inactiveengines").removeChild(document.getElementById("inactiveengines").children[0]);

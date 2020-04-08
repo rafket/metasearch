@@ -298,9 +298,7 @@ popup_dom.onload = function() {
         });
     });
     popup_doc.getElementById("submit").addEventListener("click", function() {
-        browser.runtime.sendMessage({open_tab: {url: browser.runtime.getURL("options.html") + "?engine_xpath_res="+encodeURIComponent(result_xpath)+"&engine_xpath_title="+encodeURIComponent(attr_xpath["title"])+"&engine_xpath_url="+encodeURIComponent(attr_xpath["url"])+"&engine_xpath_summary="+encodeURIComponent(attr_xpath["summary"])+"&engine_name="+encodeURIComponent(popup_doc.getElementById("name").value)+"&engine_url="+encodeURIComponent(format_url)+"&engine_timeout=3000&engine_ttl=300000", active: true}}).then(
-            () => browser.runtime.sendMessage({kill_me: true})
-        );
+        browser.runtime.sendMessage({update_me: {url: browser.runtime.getURL("options.html") + "?engine_xpath_res="+encodeURIComponent(result_xpath)+"&engine_xpath_title="+encodeURIComponent(attr_xpath["title"])+"&engine_xpath_url="+encodeURIComponent(attr_xpath["url"])+"&engine_xpath_summary="+encodeURIComponent(attr_xpath["summary"])+"&engine_name="+encodeURIComponent(popup_doc.getElementById("name").value)+"&engine_url="+encodeURIComponent(format_url)+"&engine_timeout=3000&engine_ttl=300000", active: true}});
     });
     updateResultXPath();
 };
