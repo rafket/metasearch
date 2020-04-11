@@ -133,9 +133,9 @@ body {
   border: none;
   padding: 0 1rem 0 1rem;
   margin: 0;
-  color: #aaa;
+  fill: #aaa;
   font-size: 2rem;
-  font-family: monospace;
+  width: 1rem;
   display: none;
 }
 
@@ -155,28 +155,37 @@ body {
   display: none;
 }
 
-#inactiveengines {
+#inactiveengines_box {
   margin-right: 5%;
-  display: block;
+  display: none;
   margin-left: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 2em;
   width: auto;
   border: 1px solid #cccccc;
   border-radius: 5px 5px 5px 5px;
-  padding: 1rem;
   float: none;
+  background: #fafafa;
 }
 
-#inactiveengines:empty {
+#inactiveengines {
   display: none;
+  background: white;
+  border-top: 1px solid #cacaca;
+  padding: 1em;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
 @media (min-width: 50em) {
-  #inactiveengines {
-    max-width: 35%;
+  #inactiveengines_box {
+    width: 35%;
     margin-left: 0;
     margin-right: 2%;
     float: right;
+  }
+
+  #inactiveengines {
+    display: block;
   }
 
   #searchresults {
@@ -195,20 +204,12 @@ body {
   }
 }
 
-#inactiveengines h2 {
-  margin-top: 0;
+#inactiveengines_box h2 {
   color: #3c3c3c;
   font-weight: normal;
   font-size: 1.2em;
   display: block;
-  border-bottom: 1px solid #cacaca;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  margin-top: -1rem;
-  margin-bottom: 1em;
-  padding: inherit;
-  background: #fafafa;
-  border-radius: 5px 5px 0 0;
+  padding: 1em;
 }
 
 .result_url {

@@ -16,6 +16,10 @@ if (params.get("q")) {
 
 searchclear_dom.addEventListener("click", () => {searchbar_dom.value = ""; updClearIcon();});
 searchbar_dom.addEventListener("input", updClearIcon);
+document.getElementById("inactiveengines_box").children[0]
+    .addEventListener("click", () => {
+        document.getElementById("inactiveengines").style.display = document.getElementById("inactiveengines").style.display == "none" ? "block" : "none";
+    });
 
 function get(url, engine) {
     return getCache(engine, url).then(function(cached) {
@@ -90,9 +94,6 @@ function updateResults(results) {
 
 function performSearch(search_term) {
     document.title = search_term + " - Metasearch";
-    var h2 = document.createElement("h2");
-    h2.appendChild(document.createTextNode("Enable inactive engine"));
-    document.getElementById("inactiveengines").appendChild(h2);
     engines_promise.then(function(engines) {
         let contains_alias = engines.reduce((acum, cur) => (acum || checkAlias(cur, search_term)), false);
         let sanitized_search = sanitizeSearch(engines, search_term);
@@ -108,14 +109,15 @@ function performSearch(search_term) {
 }
 
 function addUnusedEngine(engine, sanitized_search) {
+    document.getElementById("inactiveengines_box").style.display = "block";
     var button = document.createElement("button");
     button.appendChild(document.createTextNode(engine.name));
     button.title = engine.alias;
     button.addEventListener("click", function() {
         searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine).catch(console.log);
         document.getElementById("inactiveengines").removeChild(button);
-        if (document.getElementById("inactiveengines").children.length == 1) {
-            document.getElementById("inactiveengines").removeChild(document.getElementById("inactiveengines").children[0]);
+        if (document.getElementById("inactiveengines").children.length == 0) {
+            document.getElementById("inactiveengines_box").style.display = "none";
         }
     });
     document.getElementById("inactiveengines").appendChild(button);
