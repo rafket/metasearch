@@ -43,12 +43,12 @@
     "name": "IMDb",
     "alias": "movie,tv,imdb",
     "keywords": "",
-    "baseurl": "https://www.imdb.com/search/title/?title={searchTerms}",
+    "baseurl": "https://www.imdb.com/search/title/?title={searchTerms}&count=10",
     "xpath_result": "//*[@id='main']/div/div[3]/div/div",
     "xpath_title": ".//div[3]/h3/a",
     "xpath_url": ".//div[3]/h3/a",
     "xpath_summary": ".//div[3]/p[2]",
-    "timeout": 5000,
+    "timeout": 20000,
     "ttl": 86400000
   },
   {
@@ -152,7 +152,7 @@
     "xpath_title": ".//header/a",
     "xpath_url": ".//header/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 5000,
+    "timeout": 10000,
     "ttl": 300000
   },
   {
@@ -217,7 +217,7 @@
     "xpath_title": ".//h2",
     "xpath_url": "./*/a",
     "xpath_summary": "./div/p",
-    "timeout": 3000,
+    "timeout": 5000,
     "ttl": 300000
   },
   {
@@ -230,7 +230,7 @@
     "xpath_title": "./div[1]/span/a",
     "xpath_url": "./div[1]/span/a",
     "xpath_summary": "./div[2]",
-    "timeout": 5000,
+    "timeout": 10000,
     "ttl": 86395000
   },
   {
