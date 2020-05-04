@@ -3,14 +3,17 @@ import {getEngineSpec} from "./storage.js";
 function performSearch(engine, searchTerm) {
     var output;
     var begin_time = Date.now();
+    var first_res;
     browser.runtime.sendMessage({open_engine: {url: engine.baseurl.replace("{searchTerms}", encodeURIComponent(searchTerm)), timeout: engine.timeout}})
         .then(tabid => {
             let port = browser.tabs.connect(tabid);
             port.postMessage(engine);
             port.onMessage.addListener(function(r) {
                 if (r && r.resp) {
-                    output = {resp: r.resp, time: Date.now() - begin_time};
-                    console.log(output);
+                    if (!first_res && r.resp.length > 0) {
+                        first_res = Date.now() - begin_time;
+                    }
+                    output = {resp: r.resp, time: Date.now() - begin_time, first_res: first_res};
                 }
                 else {
                     console.log(r.err || r);
@@ -37,7 +40,7 @@ getEngineSpec().then(function(engines) {
             .then(r => {
                 console.log(engine.name, r);
                 if (r && r.resp && r.resp.length) {
-                    eng_stat.innerText = "OK " + r.resp.length + " " + r.time + " ms";
+                    eng_stat.innerText = "OK " + r.resp.length + " " + r.first_res + " ms -- " +  r.time + " ms";
                     eng_stat.style.color = "green";
                 }
                 else if (r) {
