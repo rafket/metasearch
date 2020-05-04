@@ -33,7 +33,6 @@ function getXPath(xpath_result, xpath_title, xpath_url, xpath_summary) {
 
 browser.runtime.onConnect.addListener(function(port) {
     var prev_resp = null;
-    port.postMessage({"resp": "hello"});
     port.onMessage.addListener(function(m) {
         const sendXPath = function() {
             getXPath(m.xpath_result, m.xpath_title, m.xpath_url, m.xpath_summary).then(
