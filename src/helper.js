@@ -33,11 +33,24 @@ function getXPath(xpath_result, xpath_title, xpath_url, xpath_summary) {
 
 browser.runtime.onConnect.addListener(function(port) {
     var prev_resp = null;
+    port.postMessage({"resp": "hello"});
     port.onMessage.addListener(function(m) {
         const sendXPath = function() {
             getXPath(m.xpath_result, m.xpath_title, m.xpath_url, m.xpath_summary).then(
                 function(resp) {
-                    if (resp !== prev_resp) {
+                    if (!resp) {
+                        return;
+                    }
+                    var isDiff = !prev_resp || (prev_resp.length != resp.length);
+                    if (!isDiff) {
+                        for (var i=0; i<resp.length; ++i) {
+                            if (!Object.keys(resp[i]).every((key) =>  resp[i][key] === prev_resp[i][key])) {
+                                isDiff = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (isDiff) {
                         port.postMessage({"resp": resp});
                         prev_resp = resp;
                     }

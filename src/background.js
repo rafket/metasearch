@@ -3,7 +3,11 @@ browser.browserAction.onClicked.addListener(function() {
 });
 
 browser.webRequest.onBeforeRequest.addListener(
-    req => browser.tabs.update(req.tabId, {url: req.url.replace("https://metasearch/", browser.runtime.getURL("/main.html"))}),
+    req => browser.tabs.update(req.tabId, {
+        url: req.url
+            .replace("https://metasearch/main.html", browser.runtime.getURL("/main.html"))
+            .replace("https://metasearch/", browser.runtime.getURL("/main.html"))
+    }),
     {urls: ["https://metasearch/*"]}
 );
 
@@ -25,8 +29,8 @@ browser.runtime.onMessage.addListener(
                     setTimeout(() => browser.tabs.remove(tab.id), request.open_engine.timeout);
                     tabid = tab.id;
                 })
-                .then(() => browser.tabs.executeScript(tabid, {file: "browser-polyfill.min.js"}))
-                .then(() => browser.tabs.executeScript(tabid, {file: "helper.js"}))
+                .then(() => browser.tabs.executeScript(tabid, {file: "browser-polyfill.min.js", runAt: "document_start"}))
+                .then(() => browser.tabs.executeScript(tabid, {file: "helper.js", runAt: "document_start"}))
                 .then(() => tabid);
             return prom;
         }
