@@ -5,7 +5,7 @@
     "alias": "ddg",
     "keywords": "*",
     "baseurl": "https://duckduckgo.com/html/?q={searchTerms}",
-    "xpath_result": "//*[@id='links']/div/div",
+    "xpath_result": "//*[contains(concat(' ',@class,' '), ' web-result ')]/div",
     "xpath_title": "./h2/a",
     "xpath_url": "./h2/a",
     "xpath_summary": "./a",
