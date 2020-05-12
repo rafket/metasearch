@@ -224,7 +224,7 @@
     "id": "default_se",
     "name": "Stack Exchange",
     "alias": "se",
-    "keywords": "",
+    "keywords": "c++,cpp,javascript,python,js,rust,es6,latex,tex,function,matrix",
     "baseurl": "https://stackexchange.com/search?q={searchTerms}",
     "xpath_result": "//*[(contains(concat(' ',@class,' '), ' summary '))]",
     "xpath_title": "./div[1]/span/a",
