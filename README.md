@@ -51,4 +51,4 @@ matches all queries (enabled by default for DuckDuckGo and Wikipedia). If an
 engine's keywords exist in the query, but its alias doesn't it will only be
 queried if the query does not contain any aliases.
 
-![Example search "python pandas groupby apply"](./screenshots/usage_1.png)
+![Example search "python write to file"](./screenshots/usage_1.png)
