@@ -13,6 +13,9 @@ if (params.get("q")) {
     updClearIcon();
     performSearch(params.get("q"));
 }
+else {
+    document.getElementById("header").className="landing";
+}
 
 searchclear_dom.addEventListener("click", () => {searchbar_dom.value = ""; updClearIcon();});
 searchbar_dom.addEventListener("input", updClearIcon);

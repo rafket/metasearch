@@ -82,13 +82,34 @@ body {
 }
 
 #searchform {
-  margin-left: 5%;
+  left: 5%;
   width: 90%;
   height: 2.9rem;
   border: 1px solid #cacaca;
   display: inline-block;
   border-radius: 5px;
   position: relative;
+  top: 0;
+}
+
+#header.landing #searchform {
+  top: 40%;
+}
+
+#logo {
+  display: none;
+  color: #0296cc;
+  text-shadow: 1px 1px #666;
+  font-family: "Bitstream Vera Serif", serif;
+}
+
+#header.landing #logo {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  font-size: 300%;
+  width: 100%;
+  text-align: center;
 }
 
 #searchbar::-webkit-search-cancel-button {
@@ -148,11 +169,21 @@ body {
   overflow: hidden;
 }
 
+#header.landing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
 #header a {
   float: right;
   margin-right: 2rem;
   color: #00278e;
   display: none;
+}
+
+#header.landing a {
+  display: inline-block;
 }
 
 #inactiveengines_box {
@@ -196,7 +227,11 @@ body {
 
   #searchform {
     width: 45%;
-    margin-left: 10%;
+    left: 10%;
+  }
+
+  #header.landing #searchform {
+    left: 27.5%;
   }
 
   #header a {
