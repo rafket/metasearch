@@ -165,7 +165,7 @@
     "xpath_title": "./div[1]/div/a/h2",
     "xpath_url": "./div[1]/div/a",
     "xpath_summary": "./div[2]/p",
-    "timeout": 5000,
+    "timeout": 10000,
     "ttl": 86400000
   },
   {
