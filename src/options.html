@@ -26,9 +26,12 @@
       <p> Search engines also have keywords (comma-separated terms, no spaces,
       lowercase) that enable them, but contrary to aliases, will not be removed
       from the search query before being passed on to the engines. A star (*)
-      keyword will match all queries. In general, an engine is enabled if one
-      of its keywords exists in the search query, unless an alias exists in the
-      search query and none of the engines aliases exist in the query.</p>
+      keyword will match all queries. A keyword prefixed with a minus sign (-)
+      will be removed from the query before being passed to the corresponding
+      engine (but not when passed to others). In general, an engine is enabled
+      if one of its keywords exists in the search query, unless an alias exists
+      in the search query and none of the engines aliases exist in the
+      query.</p>
       <p class="advanced hidden">The search URL is the URL that will be
       accessed for the engine. Use {searchTerms} as a placeholder for the
       search query.</p>

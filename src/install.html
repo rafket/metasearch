@@ -31,14 +31,16 @@
     "movie", "tv", and "imdb"). Keywords (such as "python" for StackOverflow)
     enable the associated engines but are not removed from the search query.
     The asterisk (*) keyword matches all queries (enabled by default for
-    DuckDuckGo and Wikipedia). If an engine"s keywords are contained in the
-    query, but its alias isn"t, it will only be queried if the query does not
-    contain any aliases.</p>
+    DuckDuckGo and Wikipedia). A keyword prefixed with the minus sign will be
+    removed before passed on to the engine, similar to an alias, but it will
+    not be removed from other engines, and other engines will still be queried.
+    If an engine"s keywords are contained in the query, but its alias isn"t, it
+    will only be queried if the query does not contain any aliases.</p>
     <p>Below are some queries for you to try out the default search engines.
     Aliases are colored in green, while keywords are colored in red.</p>
     <p>
     "<a href="/main.html?q=define%20python"><span class="alias">define</span> <span class="keyword">python</span></a>"<br>
-    "<a href="/main.html?q=kaos%20movie">kaos <span class="alias">movie</span></a>"<br>
+    "<a href="/main.html?q=kaos%20movie">kaos <span class="keyword">movie</span></a>"<br>
     "<a href="/main.html?q=cpp%20generate%20random%20numbers"><span class="keyword">cpp</span> generate random numbers</a>"<br>
     "<a href="/main.html?q=hn%20reddit_search%20gpt2"><span class="alias">hn</span> <span class="alias">rddt</span> gpt2</a>"<br>
     "<a href="/main.html?q=what%20is%20startpage%20spg">what is startpage <span class="alias">spg</span></a>"

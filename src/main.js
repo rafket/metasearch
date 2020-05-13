@@ -99,8 +99,8 @@ function performSearch(search_term) {
     document.title = search_term + " - Metasearch";
     engines_promise.then(function(engines) {
         let contains_alias = engines.reduce((acum, cur) => (acum || checkAlias(cur, search_term)), false);
-        let sanitized_search = sanitizeSearch(engines, search_term);
         engines.forEach(function(engine) {
+            let sanitized_search = sanitizeSearch(engines, search_term, engine);
             if (shouldQueryEngine(engine, search_term, contains_alias)) {
                 searchAndAddToDom(engine.baseurl.replace("{searchTerms}", encodeURIComponent(sanitized_search)), engine).catch(console.log);
             }
@@ -126,7 +126,7 @@ function addUnusedEngine(engine, sanitized_search) {
     document.getElementById("inactiveengines").appendChild(button);
 }
 
-function sanitizeSearch(engines, search_term) {
+function sanitizeSearch(engines, search_term, cureng) {
     return search_term.split(" ").reduce(function(accum, word) {
         var keep = true;
         engines.forEach(function(engine) {
@@ -135,6 +135,11 @@ function sanitizeSearch(engines, search_term) {
                     keep = false;
                 }
             });
+        });
+        cureng.keywords.split(",").forEach(function(keyword) {
+            if (keyword.charAt(0) === "-" && word.toLowerCase() === keyword.substr(1)) {
+                keep = false;
+            }
         });
         if (keep) {
             if (accum) {
@@ -165,7 +170,7 @@ function shouldQueryEngine(engine, search_term, check_alias) {
     var ans = false;
     search_term.split(" ").forEach(function(word) {
         engine.keywords.split(",").forEach(function(keyword) {
-            if (keyword.length > 0 && (word.toLowerCase() === keyword || keyword === "*")) {
+            if (keyword.length > 0 && (word.toLowerCase() === keyword || keyword === "*" || (keyword.charAt(0) === "-" && word.toLowerCase() === keyword.substr(1)))) {
                 ans = true;
             }
         });
