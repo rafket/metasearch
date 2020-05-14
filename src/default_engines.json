@@ -87,8 +87,8 @@
     "xpath_title": ".//div[1]/a[1]",
     "xpath_url": ".//div[1]/a[1]",
     "xpath_summary": ".//div[2]/div",
-    "timeout": 5000,
-    "ttl": 300000
+    "timeout": 10000,
+    "ttl": 86400000
   },
   {
     "id": "default_wiktionary",
