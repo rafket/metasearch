@@ -32,7 +32,8 @@ function getXPath(xpath_result, xpath_title, xpath_url, xpath_summary) {
 }
 
 browser.runtime.onConnect.addListener(function(port) {
-    var prev_resp = null;
+    var prev_resp = null,
+        last_upd = 0;
     port.onMessage.addListener(function(m) {
         const sendXPath = function() {
             getXPath(m.xpath_result, m.xpath_title, m.xpath_url, m.xpath_summary).then(
@@ -52,6 +53,15 @@ browser.runtime.onConnect.addListener(function(port) {
                     if (isDiff) {
                         port.postMessage({"resp": resp});
                         prev_resp = resp;
+                        var upd = Date.now();
+                        last_upd = upd;
+                        if (resp.length > 0) {
+                            setTimeout(() => {
+                                if (last_upd == upd) {
+                                    browser.runtime.sendMessage({kill_me: true});
+                                }
+                            }, 5000);
+                        }
                     }
                 }, function(err) {
                     port.postMessage({"error": err});

@@ -4,7 +4,7 @@ function performSearch(engine, searchTerm) {
     var output;
     var begin_time = Date.now();
     var first_res;
-    browser.runtime.sendMessage({open_engine: {url: engine.baseurl.replace("{searchTerms}", encodeURIComponent(searchTerm)), timeout: engine.timeout}})
+    return browser.runtime.sendMessage({open_engine: {url: engine.baseurl.replace("{searchTerms}", encodeURIComponent(searchTerm)), timeout: engine.timeout}})
         .then(tabid => {
             let port = browser.tabs.connect(tabid);
             port.postMessage(engine);
@@ -19,9 +19,17 @@ function performSearch(engine, searchTerm) {
                     console.log(r.err || r);
                 }
             });
+            return new Promise(resolve => {
+                const remFunc = (remTid) => {
+                    console.log("Closed tab", remTid);
+                    if (remTid == tabid) {
+                        browser.tabs.onRemoved.removeListener(remFunc);
+                        resolve(output);
+                    }
+                };
+                browser.tabs.onRemoved.addListener(remFunc);
+            });
         });
-    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-    return wait(engine.timeout).then(() => output);
 }
 
 var engines_dom = document.getElementById("engines");
@@ -51,6 +59,7 @@ getEngineSpec().then(function(engines) {
                     eng_stat.innerText = "TIMED OUT";
                     eng_stat.style.color = "red";
                 }
+                return 1;
             });
     });
 });
