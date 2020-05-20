@@ -9,7 +9,7 @@
     "xpath_title": "./h2/a",
     "xpath_url": "./h2/a",
     "xpath_summary": "./a",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 300000
   },
   {
@@ -22,7 +22,7 @@
     "xpath_title": ".//div[1]/a",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
@@ -35,7 +35,7 @@
     "xpath_title": ".//a[(contains(concat(' ',@class,' '), ' question-hyperlink '))]",
     "xpath_url": ".//a[(contains(concat(' ',@class,' '), ' question-hyperlink '))]",
     "xpath_summary": ".//div[(contains(@class, 'excerpt'))]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
@@ -48,20 +48,20 @@
     "xpath_title": ".//div[3]/h3/a",
     "xpath_url": ".//div[3]/h3/a",
     "xpath_summary": ".//div[3]/p[2]",
-    "timeout": 20000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
     "id": "default_imdbtv",
     "name": "IMDb (TV)",
-    "alias": "imdbtv",
+    "alias": "imdb",
     "keywords": "-tv,-show",
     "baseurl": "https://www.imdb.com/search/title/?title={searchTerms}&count=10&title_type=tv_movie,tv_series,tv_episode,tv_special,tv_miniseries,tv_short",
     "xpath_result": "//*[@id='main']/div/div[3]/div/div",
     "xpath_title": ".//div[3]/h3/a",
     "xpath_url": ".//div[3]/h3/a",
     "xpath_summary": ".//div[3]/p[2]",
-    "timeout": 20000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
@@ -74,7 +74,7 @@
     "xpath_title": ".//div[1]/a",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 604800000
   },
   {
@@ -87,7 +87,7 @@
     "xpath_title": ".//div[1]/a[1]",
     "xpath_url": ".//div[1]/a[1]",
     "xpath_summary": ".//div[2]/div",
-    "timeout": 10000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
@@ -100,7 +100,7 @@
     "xpath_title": ".//div[1]/a",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 604800000
   },
   {
@@ -113,7 +113,7 @@
     "xpath_title": ".//div[1]/a",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 604800000
   },
   {
@@ -126,7 +126,7 @@
     "xpath_title": ".//div[1]/*[1]/*[1]",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 604800000
   },
   {
@@ -139,7 +139,7 @@
     "xpath_title": ".//a/h3",
     "xpath_url": ".//a",
     "xpath_summary": ".//p",
-    "timeout": 10000,
+    "timeout": 30000,
     "ttl": 300000
   },
   {
@@ -165,7 +165,7 @@
     "xpath_title": ".//header/a",
     "xpath_url": ".//header/a",
     "xpath_summary": ".//div[2]",
-    "timeout": 10000,
+    "timeout": 30000,
     "ttl": 300000
   },
   {
@@ -178,20 +178,20 @@
     "xpath_title": "./div[1]/div/a/h2",
     "xpath_url": "./div[1]/div/a",
     "xpath_summary": "./div[2]/p",
-    "timeout": 10000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
     "id": "default_tmdbtv",
     "name": "The Movie DB (TV)",
-    "alias": "tmdbtv",
+    "alias": "tmdb",
     "keywords": "-tv,-show",
     "baseurl": "https://www.themoviedb.org/search/tv?query={searchTerms}",
     "xpath_result": "//*[(contains(concat(' ',@class,' '), ' details '))]",
     "xpath_title": "./div[1]/div/a/h2",
     "xpath_url": "./div[1]/div/a",
     "xpath_summary": "./div[2]/p",
-    "timeout": 10000,
+    "timeout": 30000,
     "ttl": 86400000
   },
   {
@@ -204,7 +204,7 @@
     "xpath_title": ".//div[1]/a/h3",
     "xpath_url": ".//div[1]/a",
     "xpath_summary": ".//div[2]/div/span",
-    "timeout": 3000,
+    "timeout": 30000,
     "ttl": 300000
   },
   {
@@ -217,7 +217,7 @@
     "xpath_title": ".//div/h2/a",
     "xpath_url": ".//div/h2/a",
     "xpath_summary": ".//a[2]/p",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 300000
   },
   {
@@ -243,7 +243,7 @@
     "xpath_title": ".//h2",
     "xpath_url": "./*/a",
     "xpath_summary": "./div/p",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 300000
   },
   {
@@ -256,7 +256,7 @@
     "xpath_title": "./div[1]/span/a",
     "xpath_url": "./div[1]/span/a",
     "xpath_summary": "./div[2]",
-    "timeout": 10000,
+    "timeout": 30000,
     "ttl": 86395000
   },
   {
@@ -269,7 +269,7 @@
     "xpath_title": "./div/h3/a",
     "xpath_url": ".//a",
     "xpath_summary": "./div/div[2]",
-    "timeout": 5000,
+    "timeout": 30000,
     "ttl": 86400000
   }
 ]
