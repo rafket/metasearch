@@ -316,3 +316,7 @@ body {
   display: block;
   max-width: 100%;
 }
+
+.result_summary em {
+  font-weight: bold;
+}

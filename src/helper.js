@@ -19,12 +19,39 @@ function extractXPaths(xpath_result, xpath_sub, retries=10) {
     return new Promise(resolve => resolve(results));
 }
 
+function parseSummary(el) {
+    if (el == null) {
+        return [];
+    }
+    if (el.childNodes.length == 0) {
+        if (el.nodeType == Node.TEXT_NODE) {
+            return [{"content": el.nodeValue, "is_keyword": false}];
+        }
+        return [];
+    }
+    var out;
+    if (el.childNodes.length == 1) {
+        out = parseSummary(el.firstChild);
+    }
+    else if (el.childNodes.length > 1) {
+        out = [].concat.apply([], [...el.childNodes].map(c => parseSummary(c)));
+    }
+    const style = getComputedStyle(el);
+    if (style.visibility == "hidden") {
+        return [];
+    }
+    if (style.fontWeight > 400) {
+        return [{"content": out.map(x => x.content).join(""), "is_keyword": true}];
+    }
+    return out;
+}
+
 function getXPath(xpath_result, xpath_title, xpath_url, xpath_summary) {
     return extractXPaths(xpath_result, {"title": xpath_title, "url": xpath_url, "summary": xpath_summary}, 0).then(function(elements) {
         var results = [];
         elements.forEach(function (el, i) {
             if (el["title"] != null && el["title"].innerText) {
-                results.push({"title": el["title"].innerText, "url": (el["url"] || window.location).href, "summary": (el["summary"] || {"innerText": ""}).innerText || "", "score": i/elements.length});
+                results.push({"title": el["title"].innerText, "url": (el["url"] || window.location).href, "summary": parseSummary(el["summary"]), "score": i/elements.length});
             }
         });
         return results;

@@ -87,7 +87,19 @@ function updateResults(results) {
             var div = document.createElement("div"); div.className = "result_info"; entry.appendChild(div);
             var p0 = document.createElement("p"); p0.appendChild(document.createTextNode(decodeURIComponent(el.url))); p0.className = "result_url"; div.appendChild(p0);
             var p2 = document.createElement("p"); p2.appendChild(document.createTextNode(el.engine_name)); p2.className = "result_engine"; div.appendChild(p2);
-            var p1 = document.createElement("p"); p1.appendChild(document.createTextNode(el.summary)); p1.className = "result_summary"; entry.appendChild(p1);
+            var p1 = document.createElement("p");
+            el.summary.forEach(s => {
+                var txt = document.createTextNode(s.content);
+                if (s.is_keyword) {
+                    var em = document.createElement("em");
+                    em.appendChild(txt);
+                    p1.appendChild(em);
+                }
+                else {
+                    p1.appendChild(txt);
+                }
+            });
+            p1.className = "result_summary"; entry.appendChild(p1);
             new_results_dom.appendChild(entry);
         });
     let results_dom = document.getElementById("searchresults");
